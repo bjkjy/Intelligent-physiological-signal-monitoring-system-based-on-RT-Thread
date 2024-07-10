@@ -12,7 +12,7 @@
 
 
 #define FFT_N           1024    //定义傅里叶变换的点数
-#define START_INDEX     0       //低频过滤阈值
+#define START_INDEX     4       //低频过滤阈值
 
 struct compx        //定义一个复数结构
 {
