@@ -522,25 +522,3 @@ static void max30102_thread_entry(void *args)
     }
 }
 
-/**
- * @brief Blood butterworth bandpass filter
- * 
- * @param new_data_in 输入的新的数据 (float)
- * @param center_freq 中心频率 1.665f Hz
- * @param bandwidth   带宽 1.33f Hz
- * @param sample_rate 采样率 100.0f Hz
- * @return float 
- */
-float blood_filter(float new_data_in, float center_freq, float bandwidth, float sample_rate) 
-{ // (60 ~ 140)/min   1~ 2.33 Hz
-    static float new_data = 1.0f; // 输入数据初始值为1
-    static float prev_output1 = 0.0f, prev_output2 = 0.0f;
-    static float prev_input1 = 0.0f, prev_input2 = 0.0f;
-    float b[3], a[3];
-
-    new_data = new_data_in;
-    
-    ButterworthBandPassFilter(new_data, &prev_output1, &prev_output2, &prev_input1, &prev_input2, center_freq, bandwidth, sample_rate, b, a);
-
-    return prev_output1;
-}
